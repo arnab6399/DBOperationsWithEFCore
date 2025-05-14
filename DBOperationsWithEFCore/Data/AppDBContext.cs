@@ -8,5 +8,10 @@ namespace DBOperationsWithEFCore.Data
         {
             
         }
+
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<BookPrice> BookPrices { get; set; }
     }
 }
