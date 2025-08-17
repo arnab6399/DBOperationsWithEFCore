@@ -4,6 +4,7 @@ using DBOperationsWithEFCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBOperationsWithEFCore.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250514064527_updatedtype")]
+    partial class updatedtype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,32 +152,6 @@ namespace DBOperationsWithEFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Hindi",
-                            Title = "Hindi"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "English",
-                            Title = "English"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Bengali",
-                            Title = "Bengali"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Punjabi",
-                            Title = "Punjabi"
-                        });
                 });
 
             modelBuilder.Entity("DBOperationsWithEFCore.Data.Book", b =>
