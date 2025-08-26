@@ -58,14 +58,28 @@ namespace DBOperationsWithEFCore.Controllers
         public async Task<IActionResult> GetSpecificColumnCurrencyAsync()
         {
             //var result = await _appDBContext.Currencies.Where(x => ids.Contains(x.CurrencyId)).ToListAsync();
-            var result = await (from currency in _appDBContext.Currencies select new CurrencyDTO()
+
+            var result = await (from currency in _appDBContext.Currencies select new Currency()
             {
-                CurrencyDTOId = currency.CurrencyId,
-                CurrencyDTOTitle = currency.Title
+                CurrencyId = currency.CurrencyId,
+                Title =currency.Title
             }).ToListAsync();
-            if (result != null)
+            //anonymous property
+            var result2 = await (from currency in _appDBContext.Currencies
+                                select new 
+                                {
+                                    CurrId = currency.CurrencyId,
+                                    name = currency.Title
+                                }).ToListAsync();
+
+            var result1 = await (from currency in _appDBContext.Currencies select currency).Select(x => new CurrencyDTO()
             {
-                return Ok(result);
+                CurrencyDTOId = x.CurrencyId,
+                CurrencyDTOTitle = x.Title
+            }).ToListAsync();
+            if (result2 != null)
+            {
+                return Ok(result2);
             }
             else
             {
